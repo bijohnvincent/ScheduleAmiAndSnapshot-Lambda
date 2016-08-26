@@ -1,4 +1,5 @@
 # ScheduleBackupLambda
+![AWS Backup automation - EBS snapshot and AMI](https://github.com/bijohnvincent/ScheduleBackupLambda/blob/master/AWS%20Native%20Backup%20with%20Lambda.jpg)
 This project is for developing a solution for scheduling AMI and EBS backups using AWS Lambda. Scheduling is done using CloudWatch Events.
 
 # Automate AWS Backups using Lambda
