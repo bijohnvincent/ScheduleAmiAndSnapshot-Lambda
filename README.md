@@ -21,11 +21,11 @@ AWS is not providing any option to schedule AMI or EBS snapshot. So we have to r
 * ExcludeDevices (optional)	  - /dev/sd[b-z]. Default None
 * TransferAmi (optional)	  -  Future option
 
-*Name                          - Any AWS supported name 
-*CreateAmiBackup               - ['y', 'yes', 't', 'true', '1']
-*AmiBackupDates  (optional)    - [1-31]/Daily/[sun-sat]/[Sunday-Saturday]. Default 1
-*BackupWindowUTC (optional)    - [0-23]. Default 0
-*ExcludeDevices (optional)     - /dev/sd[b-z]. Default None
+* Name                          - Any AWS supported name 
+* CreateAmiBackup               - ['y', 'yes', 't', 'true', '1']
+* AmiBackupDates  (optional)    - [1-31]/Daily/[sun-sat]/[Sunday-Saturday]. Default 1
+* BackupWindowUTC (optional)    - [0-23]. Default 0
+* ExcludeDevices (optional)     - /dev/sd[b-z]. Default None
 
 ### You can use following tags for your EBS volumes:  
 
