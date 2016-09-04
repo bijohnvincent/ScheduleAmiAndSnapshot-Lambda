@@ -30,4 +30,70 @@ AWS is not providing any option to automate AMI or EBS snapshot. So we have to r
 * BackupWindowUTC                 - [0-23]
 * SnapshotRetentionDays(optional) - Any integer
 
+### IAM roles to be created
+#### LambdaEbsBackup
+Give following role for EbsBackup and SnapshotRetention
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Sid": "SnapshotAndTagPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateSnapshot",
+                "ec2:CreateTags",
+                "ec2:DeleteSnapshot",
+                "ec2:DescribeVolumes",
+                "ec2:DescribeSnapshots"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+```
 
+#### LambdaAMIBackup
+Give this role for AMI backup and AMIRetention functions
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Sid": "AmiPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateImage",
+                "ec2:DescribeInstances",
+                "ec2:CreateTags",
+                "ec2:DeregisterImage",
+                "ec2:DeleteSnapshot",
+                "ec2:DescribeImages"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+```
