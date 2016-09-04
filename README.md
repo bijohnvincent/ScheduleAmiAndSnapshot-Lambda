@@ -47,7 +47,7 @@ Give following role for EbsBackup and SnapshotRetention
             "Resource": "arn:aws:logs:*:*:*"
         },
         {
-            "Sid": "SnapshotAndTagPermissions",
+            "Sid": "SnapshotPermissions",
             "Effect": "Allow",
             "Action": [
                 "ec2:CreateSnapshot",
