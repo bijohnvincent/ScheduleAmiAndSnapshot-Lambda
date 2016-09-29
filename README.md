@@ -10,7 +10,7 @@ AWS is not providing any option to automate AMI or EBS snapshot. So we have to r
 ###Following are the functions you have to create in Lambda
 * AmiBackup
 * AmiRetention
-* EsbBackup
+* EbsBackup
 * SnapshotRetention
 
 ###You can use following tags for your instances:
