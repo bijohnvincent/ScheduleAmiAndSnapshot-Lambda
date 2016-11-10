@@ -1,6 +1,14 @@
+# Name          : AmiRetention
+# Author        : Bijohn Vincent
+# Functionality : This script will delete the AMI and it's associated snapshots once it 
+#                   is older than the retention period set.
+#
+
+# Import required modules.
 import boto3
 import datetime
 
+# Get current time (UTC)
 now = datetime.datetime.now()
 
 # Function for deleting old AMIs.
@@ -40,6 +48,8 @@ def deregisterOldAmis():
             DeviceMappings = ImageDetails['Images'][0]['BlockDeviceMappings']
             SnapshotIds = []
             for device in DeviceMappings:
+                if "Ebs" not in device:       # Skip if the device is not a ES volume
+                    continue
                 SnapshotIds.append(device['Ebs']['SnapshotId'])
 
             # Deregister AMI 
