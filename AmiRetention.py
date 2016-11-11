@@ -48,7 +48,7 @@ def deregisterOldAmis():
             DeviceMappings = ImageDetails['Images'][0]['BlockDeviceMappings']
             SnapshotIds = []
             for device in DeviceMappings:
-                if "Ebs" not in device:       # Skip if the device is not a ES volume
+                if "Ebs" not in device:       # Skip if the device is not a EBS volume
                     continue
                 SnapshotIds.append(device['Ebs']['SnapshotId'])
 
