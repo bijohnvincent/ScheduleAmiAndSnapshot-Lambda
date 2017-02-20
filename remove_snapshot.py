@@ -1,3 +1,13 @@
+
+# Name          : SnapshotRetention
+# Author        : Bijohn Vincent
+# Functionality : This script will remove the snapshots that are created Ebs backup script in this project.
+#                   Default retention day is set as 7 days. You can override it by adding a tag 'SnapshotRetentionDays'
+#                   on your EBS volume which will be couped to the new snapshot by EBS backup script in this project.
+#                   
+
+
+# Import modules
 import boto3
 import datetime
 
