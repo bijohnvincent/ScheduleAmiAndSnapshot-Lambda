@@ -7,13 +7,13 @@ This project is for developing a solution for scheduling AMI and EBS backups usi
 
 AWS is not providing any option to automate AMI or EBS snapshot. So we have to run a server for scheduling regular EBS snapshot and AMIs scripts. AWS Lambda gives option to save our function on AWS itself and CloudWatch has an option to schedule the functions. In this project, I am trying to leverage both and achieve a solution for backup using AWS native services with $0 cost !!!
 
-###Following are the functions you have to create in Lambda
+### Following are the functions you have to create in Lambda
 * AmiBackup
 * AmiRetention
 * EbsBackup
 * SnapshotRetention
 
-###You can use following tags for your instances:
+### You can use following tags for your instances:
 
 * Name                          - Any AWS supported name 
 * CreateAmiBackup               - ['y', 'yes', 't', 'true', '1']
