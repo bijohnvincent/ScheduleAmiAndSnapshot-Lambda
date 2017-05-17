@@ -1,3 +1,8 @@
+# Name          : AmiBackup
+# Author        : Bijohn Vincent
+# Functionality : This function will create AMI of the EC2 instance by reading tags
+
+
 #Import modules
 import boto3
 import datetime
