@@ -24,7 +24,7 @@ def deregisterOldAmis():
         # Get the AMI retention override value.
         # If there is a override value in tag, set it as retenion period
         
-        AmiRetention = 7 # Retention period of AMIs, created by Lambda Backup Script. In days
+        amiRetention = 7 # Retention period of AMIs, created by Lambda Backup Script. In days
         for tag in ami['Tags']:    
             if tag['Key'] == 'AmiRetentionDays':
                 if not tag['Value'].isdigit():
