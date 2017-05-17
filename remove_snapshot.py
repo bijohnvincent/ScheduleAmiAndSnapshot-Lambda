@@ -11,10 +11,10 @@
 import boto3
 import datetime
 
-now = datetime.datetime.now()
 
 # Function for deleting old snapshots.
 def deleteOldSnapshot():
+    now = datetime.datetime.now()
     ec2 =  boto3.client('ec2')
     Snapshots = ec2.describe_snapshots(Filters=[{'Name':'description','Values':['Created by AWS Lambda Backup Script*']}])
     for snapshot in Snapshots['Snapshots']:
