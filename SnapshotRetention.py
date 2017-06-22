@@ -19,6 +19,10 @@ def deleteOldSnapshot():
     Snapshots = ec2.describe_snapshots(Filters=[{'Name':'description','Values':['Created by AWS Lambda Backup Script*']}])
     for snapshot in Snapshots['Snapshots']:
         snapshotRetention = 7 # Retention period of snapshots, created by Lambda Backup Script. In days
+        # Check if the snapshot has Tags. Else skip further process.
+        if 'Tags' not in snapshot:
+            print "Cant find any tags for " + snapshot['SnapshotId'] + ". Please fix it"
+            continue
         for tag in snapshot['Tags']:    # Get the snapshot retention override value
             if tag['Key'] == 'SnapshotRetentionDays':
                 if not tag['Value'].isdigit():
