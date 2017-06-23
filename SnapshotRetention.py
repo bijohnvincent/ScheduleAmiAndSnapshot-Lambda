@@ -36,7 +36,7 @@ def deleteOldSnapshot():
         if snapshotRetentionOverride:
             snapshotRetention = int(snapshotRetentionOverride)
         snapshotAge = now - snapshot['StartTime'].replace(tzinfo=None)
-        print now, snapshot['StartTime'], snapshot['StartTime'].replace(tzinfo=None)
+        #print now, snapshot['StartTime'], snapshot['StartTime'].replace(tzinfo=None)
         if snapshotAge > datetime.timedelta(days = snapshotRetention):
             print "Snapshot %s is %s hour old. Retention is set as %s days. Deleting %s." % (snapshot['SnapshotId'], snapshotAge, snapshotRetention, snapshot['SnapshotId'])
             ec2.delete_snapshot(DryRun=False, SnapshotId=snapshot['SnapshotId'])
