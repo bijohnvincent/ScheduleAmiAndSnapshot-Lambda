@@ -9,16 +9,18 @@ import datetime
 import re
 
 # Initialize global variables
-now = datetime.datetime.now()
-today = now.day
-currentHour = now.hour
-currentMonth = now.strftime('%B')
-currentWeek = now.strftime('%A')
-currentWeekShort = now.strftime('%a')
 allowdWeekDayValues=['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat','sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
 #Function for creating AMI.   
 def createAmi():
+    # Variables
+    now = datetime.datetime.now()
+    today = now.day
+    currentHour = now.hour
+    currentMonth = now.strftime('%B')
+    currentWeek = now.strftime('%A')
+    currentWeekShort = now.strftime('%a')
+
     print "Today's is %s  %s %s and current UTC hour is %s" %(currentMonth, today, currentWeek, currentHour)
     ec2 =  boto3.client('ec2')
     Reservations = ec2.describe_instances(Filters=[{'Name':'tag-key','Values':['CreateAmiBackup']}])   # Get details of instances with tag=CreateAmiBackup
