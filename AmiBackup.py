@@ -103,7 +103,7 @@ def createAmi():
                 # Get excluded devices from tag 'ExcludeDevices'
                 # If there is any error in specified device names, no devices will be exccluded
                 elif tag['Key'] == 'ExcludeDevices':
-                    print 'ExcludeDevices'
+                    print 'Checking ExcludeDevices tag values...'
                     ExcludedDevices = tag['Value'].replace(' ', '').rstrip(',').split(',')   # Remove unwanted whitespace and coma and make it a list
                     for device in ExcludedDevices:                               # Loop for creating Exclusion device list
                         if re.match('^/dev/sd[b-z]$', device):                    # Validation for device name
