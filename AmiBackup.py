@@ -43,7 +43,7 @@ def createAmi():
                 # Check if 'CreateAmiBackup' flag is set.
                 # If not, set 'SkipAmi' flag to cancel AMI creation
                 if tag['Key'] == 'CreateAmiBackup':
-                    print "CreateAmiBackup"
+                    print "Checking if CreateAmiBackup tag is set..."
                     CreateAmiFlag = tag['Value'].replace(' ', '').lower()        # Remove whitespaces and convert to lower case
                     if CreateAmiFlag not in ['y', 'yes', 't', 'true', '1']:      # Exit processing remaining Tags if AMI backup is not set
                         SkipAmi = True
@@ -53,7 +53,7 @@ def createAmi():
                 # Check if 'AmiBackupDates' date is today (UTC)
                 # If not, set 'SkipAmi' flag to cancel AMI creation
                 elif tag['Key'] == 'AmiBackupDates':
-                    print "AmiBackupDates"
+                    print "Getting AmiBackupDates tag values..."
                     AmiDateList = tag['Value'].replace(' ', '').rstrip(',').split(",") # Remove unwanted white scpaces and comas and create a list
                     for date in AmiDateList:                                     # Overwrite default value of AMI date with Tag value
                         #print date
@@ -82,7 +82,7 @@ def createAmi():
                 # Check if 'BackupWindowUTC' tag has UTC current hour
                 # If not, set 'SkipAmi' flag to cancel AMI creation
                 elif tag['Key'] == 'BackupWindowUTC':
-                    print "BackupWindowUTC"
+                    print "Checking BackupWindowUTC tag values..."
                     AmiTimeList = tag['Value'].replace(' ', '').rstrip(',').split(",")
                     for time in AmiTimeList:                                     # Overwrite default value of AMI time with Tag value
                         print time
@@ -111,25 +111,25 @@ def createAmi():
                         else:
                             print "Error:Wrong device name given for exclusion. It should be in the format: /dev/sd[b-z]  . Will not exclude any devices"
                             ExcludedDevicesList = []
-                            print ExcludedDevicesList
+                            #print ExcludedDevicesList
                             break
-                        print ExcludedDevicesList
+                        #print ExcludedDevicesList
                         
                 # Check if the 'TransferAmi' flag is set
                 #elif tag['Key'] == 'TransferAmi':
                 #    TransferAmiFlag = tag['Value'].replace(' ', '').lower()      # Remove whitespaces and convert to lower case
-            print AmiDate
-            print AmiTime
+            print "AMI should be taken on " + AmiDate
+            print "AMI should be taken at " + AmiTime
             if SkipAmi:
                 print "Not creating AMI of instance: " + InstanceId
                 break
-            print "creating AMI of :" + InstanceId
+#            print "creating AMI of: " + InstanceId
 #            if CreateAmiFlag in ['y', 'yes', 't', 'true', '1']:
             print "Creating AMI of Instance ID: %s, Sever Name: %s" %(InstanceId, InstanceName)
             Description = "Created by AWS Lambda AMI Backup Script from %s on %s" %(InstanceId, str(now.isoformat()))
             AmiName = InstanceName + now.strftime(" - AMI taken on %Y-%m-%d at %H.%M.%S")
-            print AmiName
-            print ExcludedDevicesList
+            print "Setting AMI name as " + AmiName
+            print "Following devices will be excluded: " + ExcludedDevicesList
             AmiResponse = ec2.create_image(DryRun=False,
                                         InstanceId=InstanceId,
                                         Name=AmiName,
