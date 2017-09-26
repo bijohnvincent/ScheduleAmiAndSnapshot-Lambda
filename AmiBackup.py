@@ -118,8 +118,8 @@ def createAmi():
                 # Check if the 'TransferAmi' flag is set
                 #elif tag['Key'] == 'TransferAmi':
                 #    TransferAmiFlag = tag['Value'].replace(' ', '').lower()      # Remove whitespaces and convert to lower case
-            print "AMI should be taken on " + AmiDate
-            print "AMI should be taken at " + AmiTime
+            print "AMI should be taken on " + str(AmiDate)
+            print "AMI should be taken at " + str(AmiTime)
             if SkipAmi:
                 print "Not creating AMI of instance: " + InstanceId
                 break
