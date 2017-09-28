@@ -1,6 +1,7 @@
-# Name          : AmiBackup
+# Name          : CreateAmi
 # Author        : Bijohn Vincent
 # Functionality : This function will create AMI of the EC2 instance by reading tags
+# File Version  : 1.1
 
 
 #Import modules
@@ -46,6 +47,7 @@ def createAmi():
                     print "Checking if CreateAmiBackup tag is set..."
                     CreateAmiFlag = tag['Value'].replace(' ', '').lower()        # Remove whitespaces and convert to lower case
                     if CreateAmiFlag not in ['y', 'yes', 't', 'true', '1']:      # Exit processing remaining Tags if AMI backup is not set
+                        print "CreateAmiBackup tag is set as skip AMI"
                         SkipAmi = True
                         break
                     
@@ -121,7 +123,7 @@ def createAmi():
             print "AMI should be taken on " + str(AmiDate)
             print "AMI should be taken at " + str(AmiTime)
             if SkipAmi:
-                print "Not creating AMI of instance: " + InstanceId
+                print "All conditions are not met. Not creating AMI of instance: " + InstanceId
                 break
 #            print "creating AMI of: " + InstanceId
 #            if CreateAmiFlag in ['y', 'yes', 't', 'true', '1']:
@@ -129,7 +131,7 @@ def createAmi():
             Description = "Created by AWS Lambda AMI Backup Script from %s on %s" %(InstanceId, str(now.isoformat()))
             AmiName = InstanceName + now.strftime(" - AMI taken on %Y-%m-%d at %H.%M.%S")
             print "Setting AMI name as " + AmiName
-            print "Following devices will be excluded: " + ExcludedDevicesList
+            print "Following devices will be excluded: " + str(ExcludedDevicesList)
             AmiResponse = ec2.create_image(DryRun=False,
                                         InstanceId=InstanceId,
                                         Name=AmiName,
