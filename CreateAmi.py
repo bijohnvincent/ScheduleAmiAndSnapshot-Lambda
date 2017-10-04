@@ -87,7 +87,7 @@ def createAmi():
                     print "Checking BackupWindowUTC tag values..."
                     AmiTimeList = tag['Value'].replace(' ', '').rstrip(',').split(",")
                     for time in AmiTimeList:                                     # Overwrite default value of AMI time with Tag value
-                        print time
+                        #print time
                         if not time.isdigit() or int(time) >23:                  # Ami Time validation
                             print "Error: Wrong time entry:"+ time + ". Please correct Tag value. Expecting value [0-23]."
                             continue
@@ -120,6 +120,8 @@ def createAmi():
                 # Check if the 'TransferAmi' flag is set
                 #elif tag['Key'] == 'TransferAmi':
                 #    TransferAmiFlag = tag['Value'].replace(' ', '').lower()      # Remove whitespaces and convert to lower case
+            
+            # If conditions are not met, date and time of AMI will be the default values.
             print "AMI should be taken on " + str(AmiDate)
             print "AMI should be taken at " + str(AmiTime)
             if SkipAmi:
