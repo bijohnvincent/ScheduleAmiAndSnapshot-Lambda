@@ -2,6 +2,7 @@
 # Author        : Bijohn Vincent
 # Functionality : This script will delete the AMI and it's associated snapshots once it 
 #                   is older than the retention period set.
+# File version  : 1.1
 #
 
 # Import required modules.
@@ -20,12 +21,12 @@ def deregisterOldAmis():
         #print ami
 
 
-        # Initialize the default value for AMI retention in case no override value is setr in tags
+        # Initialize the default value for AMI retention in case no override value is set in tags
         # Get the AMI retention override value.
         # If there is a override value in tag, set it as retenion period
         
-        amiRetention = 7 # Retention period of AMIs, created by Lambda Backup Script. In days
-        for tag in ami['Tags']:    
+        amiRetention = 7 # default retention period of AMIs created by Lambda Backup Script. In days
+        for tag in ami['Tags']:
             if tag['Key'] == 'AmiRetentionDays':
                 if not tag['Value'].isdigit():
                     print "Value set for tag AmiRetentionDays =", tag['Value'], "is Invalid. Using default retention"
